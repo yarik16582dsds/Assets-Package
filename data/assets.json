@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Asset 1",
+    "description": "Description of Asset 1",
+    "file": "assets/unity/asset1.unitypackage"
+  },
+  {
+    "id": 2,
+    "name": "Asset 2",
+    "description": "Description of Asset 2",
+    "file": "assets/unity/asset2.unitypackage"
+  }
+]
