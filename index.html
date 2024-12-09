@@ -6,7 +6,7 @@
     <title>Unity Assets</title>
     <style>
         body {
-            background-image: url('/static/background.jpg');
+            background-image: url('images/background.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -103,13 +103,13 @@
         }
 
         async function downloadClicked() {
-            window.location.href = '/static/assets/your_unity_asset.unitypackage';
+            window.location.href = 'assets/your_unity_asset.unitypackage';
         }
     </script>
 </head>
 <body>
     <div class="header">
-        <img src="/static/logo.png" alt="Логотип" class="logo">
+        <img src="images/logo.png" alt="Логотип" class="logo">
         <button onclick="buttonClicked()">Главная</button>
     </div>
 
@@ -120,7 +120,7 @@
             <h2>Главная</h2>
             <p>Содержимое для главной кнопки.</p>
             <p>Надпись над кнопкой "Скачать".</p>
-            <img src="/static/image.jpg" alt="Картинка">
+            <img src="images/image.jpg" alt="Картинка">
             <button onclick="downloadClicked()">Скачать</button>
             <button onclick="hideModal('mainModal')">Закрыть</button>
         </div>
