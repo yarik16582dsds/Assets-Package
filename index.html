@@ -39,15 +39,6 @@
             margin-right: 15px;
             cursor: pointer;
         }
-        .main-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            width: 80%;
-            max-width: 1200px;
-            box-sizing: border-box;
-        }
         .add-button {
             padding: 10px 20px;
             font-size: 16px;
@@ -57,13 +48,18 @@
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-bottom: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2; /* Убедимся, что кнопка находится поверх всех элементов */
         }
         .add-button:hover {
             background-color: #555;
         }
         .page-list {
+            margin-top: 20px;
             width: 100%;
+            max-width: 1200px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -94,45 +90,6 @@
             transition: background-color 0.3s;
         }
         .page-item a:hover {
-            background-color: #555;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 3;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            color: white;
-        }
-        .modal-content {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: auto;
-            text-align: center;
-        }
-        .modal-content img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-        }
-        .modal-content a {
-            display: block;
-            margin-top: 10px;
-            color: #fff;
-            text-decoration: none;
-            background-color: #1e1e1e;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .modal-content a:hover {
             background-color: #555;
         }
         @media (max-width: 1200px) {
@@ -234,11 +191,6 @@
             pageCounter++;
         }
 
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'none';
-        }
-
         // Глобальная переменная для хранения функции addPage
         window.addPage = addPage;
     </script>
@@ -247,12 +199,7 @@
     <div class="header">
         <img src="images/logo.png" alt="Логотип" class="logo" onclick="refreshPage()">
     </div>
-    <div class="main-container">
-        <button class="add-button" onclick="window.location.href='add-page.html'">Добавить новую страницу</button>
-        <div id="pageList" class="page-list"></div>
-    </div>
-    <div id="modal" class="modal">
-        <div id="modalContent" class="modal-content"></div>
-    </div>
+    <button class="add-button" onclick="window.location.href='add-page.html'">Добавить новую страницу</button>
+    <div id="pageList" class="page-list"></div>
 </body>
 </html>
