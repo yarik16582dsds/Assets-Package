@@ -72,25 +72,45 @@
             text-align: center;
             flex: 1 1 calc(33.333% - 20px); /* 3 элемента в ряд с отступами */
             box-sizing: border-box;
+            cursor: pointer;
         }
         .page-item img {
             max-width: 100%;
             height: auto;
             margin-top: 10px;
-            cursor: pointer;
         }
-        .page-item a {
-            display: block;
-            margin-top: 10px;
-            color: #fff;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
             text-decoration: none;
-            background-color: #1e1e1e;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .page-item a:hover {
-            background-color: #555;
+            cursor: pointer;
         }
         @media (max-width: 1200px) {
             .page-item {
@@ -116,79 +136,39 @@
             pageItem.className = 'page-item';
             pageItem.innerHTML = `
                 <h2>${title}</h2>
-                <img src="${imageUrl}" alt="${title}" onclick="window.location.href='page${pageCounter}.html'">
-                <a href="${fileUrl}" download="${fileName}">Скачать файл</a>
+                <img src="${imageUrl}" alt="${title}">
             `;
+            pageItem.addEventListener('click', function() {
+                openModal(title, imageUrl, description, version, fileUrl, fileName);
+            });
             pageList.appendChild(pageItem);
 
-            // Создаем новую страницу
-            const newPageContent = `
-                <!DOCTYPE html>
-                <html lang="ru">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>${title}</title>
-                    <style>
-                        body {
-                            background-color: #f4f4f4;
-                            font-family: Arial, sans-serif;
-                            text-align: center;
-                            margin: 0;
-                            padding: 20px;
-                        }
-                        .content {
-                            background-color: white;
-                            padding: 20px;
-                            border-radius: 10px;
-                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            max-width: 600px;
-                            margin: auto;
-                        }
-                        .content img {
-                            max-width: 100%;
-                            height: auto;
-                            margin-top: 10px;
-                        }
-                        .content a {
-                            display: block;
-                            margin-top: 10px;
-                            color: #1e1e1e;
-                            text-decoration: none;
-                            background-color: #fff;
-                            padding: 10px;
-                            border-radius: 5px;
-                            border: 1px solid #ccc;
-                            transition: background-color 0.3s;
-                        }
-                        .content a:hover {
-                            background-color: #f0f0f0;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="content">
-                        <h2>${title}</h2>
-                        <img src="${imageUrl}" alt="${title}">
-                        <p>${description}</p>
-                        <p>Версия: ${version}</p>
-                        <a href="${fileUrl}" download="${fileName}">Скачать файл</a>
-                    </div>
-                </body>
-                </html>
-            `;
-
-            // Создаем blob и ссылку для скачивания новой страницы
-            const blob = new Blob([newPageContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `page${pageCounter}.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
             pageCounter++;
+        }
+
+        function openModal(title, imageUrl, description, version, fileUrl, fileName) {
+            const modal = document.getElementById('myModal');
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.innerHTML = `
+                <span class="close">&times;</span>
+                <h2>${title}</h2>
+                <img src="${imageUrl}" alt="${title}">
+                <p>${description}</p>
+                <p>Версия: ${version}</p>
+                <a href="${fileUrl}" download="${fileName}">Скачать файл</a>
+            `;
+            modal.style.display = 'block';
+
+            const closeBtn = modalContent.querySelector('.close');
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
         }
 
         // Глобальная переменная для хранения функции addPage
@@ -201,5 +181,17 @@
     </div>
     <button class="add-button" onclick="window.location.href='add-page.html'">Добавить новую страницу</button>
     <div id="pageList" class="page-list"></div>
+
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2></h2>
+            <img src="" alt="">
+            <p></p>
+            <p></p>
+            <a href="#" download>Скачать файл</a>
+        </div>
+    </div>
 </body>
 </html>
