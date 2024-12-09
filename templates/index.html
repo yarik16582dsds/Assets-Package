@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity Assets</title>
+    <style>
+        body {
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+        .header {
+            background-color: #333;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+        .logo {
+            height: 80px;
+            width: auto;
+            margin-right: 15px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(50, 50, 50, 0.9);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            z-index: 2;
+            overflow-y: auto;
+        }
+        .modal.active {
+            display: block;
+        }
+        .modal-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .modal-background.active {
+            display: block;
+        }
+        .modal-content {
+            text-align: center;
+        }
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+    </style>
+    <script>
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.getElementById('modalBackground').classList.add('active');
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.getElementById('modalBackground').classList.remove('active');
+        }
+
+        async function buttonClicked() {
+            showModal('mainModal');
+        }
+
+        async function downloadClicked() {
+            window.location.href = '/static/assets/your_unity_asset.unitypackage';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <img src="/static/logo.png" alt="Логотип" class="logo">
+        <button onclick="buttonClicked()">Главная</button>
+    </div>
+
+    <div id="modalBackground" class="modal-background" onclick="hideModal('mainModal')"></div>
+
+    <div id="mainModal" class="modal">
+        <div class="modal-content">
+            <h2>Главная</h2>
+            <p>Содержимое для главной кнопки.</p>
+            <p>Надпись над кнопкой "Скачать".</p>
+            <img src="/static/image.jpg" alt="Картинка">
+            <button onclick="downloadClicked()">Скачать</button>
+            <button onclick="hideModal('mainModal')">Закрыть</button>
+        </div>
+    </div>
+</body>
+</html>
