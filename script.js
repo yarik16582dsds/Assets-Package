@@ -3,52 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-input');
 
   if (assetsContainer) {
-    // Main page
-    fetch('/Assets-Package/data/assets.json')
-      .then(response => response.json())
-      .then(data => {
-        displayAssets(data);
+    // Главная страница
+    const assetItems = Array.from(assetsContainer.getElementsByClassName('asset-item'));
 
-        searchInput.addEventListener('input', () => {
-          const query = searchInput.value.toLowerCase();
-          const filteredAssets = data.filter(asset =>
-            asset.name.toLowerCase().includes(query)
-          );
-          displayAssets(filteredAssets);
-        });
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      assetItems.forEach(asset => {
+        const name = asset.getAttribute('data-name').toLowerCase();
+        if (name.includes(query)) {
+          asset.style.display = '';
+        } else {
+          asset.style.display = 'none';
+        }
       });
+    });
   } else {
-    // Asset details page
+    // Страница ассета
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
-    fetch('/Assets-Package/data/assets.json')
-      .then(response => response.json())
-      .then(data => {
-        const asset = data.find(item => item.id == assetId);
-        if (asset) {
-          document.getElementById('asset-name').textContent = asset.name;
-          document.getElementById('asset-description').textContent = asset.description;
-          document.getElementById('asset-download').href = asset.file;
-          document.getElementById('asset-image').src = asset.image;
-        }
-      });
-  }
-
-  function displayAssets(assets) {
-    assetsContainer.innerHTML = '';
-    assets.forEach(asset => {
-      const assetElement = document.createElement('div');
-      assetElement.classList.add('asset-item');
-      assetElement.innerHTML = `
-        <div class="asset-text">
-          <h2>${asset.name}</h2>
-          <p>${asset.description}</p>
-          <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
-        </div>
-        <img src="${asset.image}" alt="${asset.name}" class="asset-image">
-      `;
-      assetsContainer.appendChild(assetElement);
-    });
+    const assetItem = document.querySelector(`.asset-item[data-id="${assetId}"]`);
+    if (assetItem) {
+      document.getElementById('asset-name').textContent = assetItem.getAttribute('data-name');
+      document.getElementById('asset-description').textContent = assetItem.getAttribute('data-description');
+      document.getElementById('asset-download').href = assetItem.getAttribute('data-file');
+      document.getElementById('asset-image').src = assetItem.getAttribute('data-image');
+    }
   }
 });

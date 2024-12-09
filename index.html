@@ -12,7 +12,26 @@
     <input type="text" id="search-input" placeholder="Search assets...">
   </header>
   <main>
-    <div id="assets-container"></div>
+    <div id="assets-container">
+      <!-- Asset 1 -->
+      <div class="asset-item" data-id="1" data-name="ScriptEditorWindow" data-description="Description of ScriptEditorWindow" data-file="assets/ScriptEditorWindow.unitypackage" data-image="images/ScriptEditorWindow.png">
+        <div class="asset-text">
+          <h2>ScriptEditorWindow</h2>
+          <p>Description of ScriptEditorWindow</p>
+          <a href="asset-page.html?id=1" class="view-details">View Details</a>
+        </div>
+        <img src="images/ScriptEditorWindow.png" alt="ScriptEditorWindow" class="asset-image">
+      </div>
+      <!-- Asset 2 -->
+      <div class="asset-item" data-id="2" data-name="Asset 2" data-description="Description of Asset 2" data-file="assets/asset2.unitypackage" data-image="images/asset2.png">
+        <div class="asset-text">
+          <h2>Asset 2</h2>
+          <p>Description of Asset 2</p>
+          <a href="asset-page.html?id=2" class="view-details">View Details</a>
+        </div>
+        <img src="images/asset2.png" alt="Asset 2" class="asset-image">
+      </div>
+    </div>
   </main>
   <script src="script.js"></script>
 </body>
