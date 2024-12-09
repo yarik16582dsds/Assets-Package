@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('input', () => {
           const query = searchInput.value.toLowerCase();
           const filteredAssets = data.filter(asset =>
-            asset.name.toLowerCase().includes(query) ||
-            asset.description.toLowerCase().includes(query)
+            asset.name.toLowerCase().includes(query)
           );
           displayAssets(filteredAssets);
         });
