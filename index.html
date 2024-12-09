@@ -53,10 +53,46 @@
         .add-button:hover {
             background-color: #555;
         }
+        .page-list {
+            margin-top: 20px;
+        }
+        .page-item {
+            margin-bottom: 20px;
+        }
+        .page-item img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .page-item a {
+            display: block;
+            margin-top: 10px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .page-item a:hover {
+            background-color: #555;
+        }
     </style>
     <script>
         function refreshPage() {
             location.reload();
+        }
+
+        function addPage(title, imageUrl, pageUrl) {
+            const pageList = document.getElementById('pageList');
+            const pageItem = document.createElement('div');
+            pageItem.className = 'page-item';
+            pageItem.innerHTML = `
+                <h2>${title}</h2>
+                <img src="${imageUrl}" alt="${title}">
+                <a href="${pageUrl}" target="_blank">Перейти к странице</a>
+            `;
+            pageList.appendChild(pageItem);
         }
     </script>
 </head>
@@ -65,5 +101,6 @@
         <img src="images/logo.png" alt="Логотип" class="logo" onclick="refreshPage()">
     </div>
     <button class="add-button" onclick="window.location.href='add-page.html'">Добавить новую страницу</button>
+    <div id="pageList" class="page-list"></div>
 </body>
 </html>
