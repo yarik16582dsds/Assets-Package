@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить новую страницу</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Добавить новую страницу</h1>
+        <form id="addPageForm">
+            <label for="title">Название:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+
+            <label for="version">Версия:</label>
+            <input type="text" id="version" name="version" required>
+
+            <label for="image">Картинка:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('addPageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Здесь вы можете добавить код для обработки формы, например, отправку данных на сервер
+            alert('Страница успешно добавлена!');
+        });
+    </script>
+</body>
+</html>

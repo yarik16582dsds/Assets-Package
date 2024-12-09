@@ -39,6 +39,20 @@
             margin-right: 15px;
             cursor: pointer;
         }
+        .add-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .add-button:hover {
+            background-color: #555;
+        }
     </style>
     <script>
         function refreshPage() {
@@ -50,5 +64,6 @@
     <div class="header">
         <img src="images/logo.png" alt="Логотип" class="logo" onclick="refreshPage()">
     </div>
+    <button class="add-button" onclick="window.location.href='add-page.html'">Добавить новую страницу</button>
 </body>
 </html>
