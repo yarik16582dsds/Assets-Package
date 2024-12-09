@@ -2,8 +2,8 @@
   {
     "id": 1,
     "name": "Asset 1",
-    "description": "Description of Asset 1",
-    "file": "assets/unity/asset1.unitypackage"
+    "description": "ScriptEditorWindow",
+    "file": "assets/unity/ScriptEditorWindow.unitypackage"
   },
   {
     "id": 2,
