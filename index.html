@@ -1,22 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Unity Assets</title>
+    <style>
+        body {
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .header {
+            background-color: #333;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+        .logo {
+            height: 80px;
+            width: auto;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .add-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2; /* Убедимся, что кнопка находится поверх всех элементов */
+        }
+        .add-button:hover {
+            background-color: #555;
+        }
+        .page-list {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .page-item {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            flex: 1 1 calc(33.333% - 20px); /* 3 элемента в ряд с отступами */
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .page-item img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media (max-width: 1200px) {
+            .page-item {
+                flex: 1 1 calc(50% - 20px); /* 2 элемента в ряд с отступами */
+            }
+        }
+        @media (max-width: 768px) {
+            .page-item {
+                flex: 1 1 calc(100% - 20px); /* 1 элемент в ряд с отступами */
+            }
+        }
+    </style>
+    <script>
+        let pageCounter = 1;
+
+        function refreshPage() {
+            location.reload();
+        }
+
+        function addPage(title, imageUrl, description, version, fileUrl, fileName) {
+            const pageList = document.getElementById('pageList');
+            const pageItem = document.createElement('div');
+            pageItem.className = 'page-item';
+            pageItem.innerHTML = `
+                <h2>${title}</h2>
+                <img src="${imageUrl}" alt="${title}">
+            `;
+            pageItem.addEventListener('click', function() {
+                openModal(title, imageUrl, description, version, fileUrl, fileName);
+            });
+            pageList.appendChild(pageItem);
+
+            pageCounter++;
+        }
+
+        function openModal(title, imageUrl, description, version, fileUrl, fileName) {
+            const modal = document.getElementById('myModal');
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.innerHTML = `
+                <span class="close">&times;</span>
+                <h2>${title}</h2>
+                <img src="${imageUrl}" alt="${title}">
+                <p>${description}</p>
+                <p>Версия: ${version}</p>
+                <a href="${fileUrl}" download="${fileName}">Скачать файл</a>
+            `;
+            modal.style.display = 'block';
+
+            const closeBtn = modalContent.querySelector('.close');
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Глобальная переменная для хранения функции addPage
+        window.addPage = addPage;
+    </script>
 </head>
 <body>
-    <h1>Main Page</h1>
-    <button onclick="createPage()">Create Page</button>
-    <div id="modal" class="modal" style="display:none;">
+    <div class="header">
+        <img src="images/logo.png" alt="Логотип" class="logo" onclick="refreshPage()">
+    </div>
+    <button class="add-button" onclick="window.location.href='add-page.html'">Добавить новую страницу</button>
+    <div id="pageList" class="page-list"></div>
+
+    <!-- Модальное окно -->
+    <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <img id="modal-image" src="" alt="Page Image" onclick="goToPage()">
-            <button onclick="downloadFile()">Download</button>
+            <span class="close">&times;</span>
+            <h2></h2>
+            <img src="" alt="">
+            <p></p>
+            <p></p>
+            <a href="#" download>Скачать файл</a>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
