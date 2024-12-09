@@ -96,7 +96,7 @@
                 window.opener.addPage(title, imageUrl, pageUrl);
 
                 alert('Страница успешно добавлена!');
-                window.close();
+                window.location.href = 'index.html'; // Перенаправление на главную страницу
             }
         });
     </script>
