@@ -80,8 +80,7 @@
                 const fileUrl = URL.createObjectURL(file);
 
                 // Создаем новую страницу
-                const newPage = document.createElement('a');
-                newPage.href = 'javascript:void(0)';
+                const newPage = document.createElement('div');
                 newPage.innerHTML = `
                     <h2>${title}</h2>
                     <img src="${imageUrl}" alt="${title}">
@@ -89,12 +88,11 @@
                     <p>Версия: ${version}</p>
                     <a href="${fileUrl}" download="${file.name}">Скачать файл</a>
                 `;
-                newPage.target = '_blank';
                 newPage.style.display = 'none';
                 document.body.appendChild(newPage);
 
                 // Добавляем ссылку на новую страницу на главную страницу
-                const pageUrl = newPage.href;
+                const pageUrl = 'new-page.html'; // URL новой страницы
                 window.opener.addPage(title, imageUrl, pageUrl);
 
                 alert('Страница успешно добавлена!');
