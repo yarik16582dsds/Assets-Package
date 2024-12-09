@@ -1,12 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Flask App</title>
+    <style>
+        body {
+            background-image: url('/static/background.jpg'); /* относительный путь */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh; /* Заполняет всю высоту экрана */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0; /* Убирает отступы по умолчанию */
+        }
+        .header {
+            background-color: #333; /* Темно-серая полоска */
+            width: 100%; /* Полная ширина */
+            height: 60px; /* Фиксированная высота полоски */
+            display: flex; /* Используем flexbox для центрирования содержимого */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            position: absolute; /* Позиция по всей ширине */
+            top: 0; /* Вверх страницы */
+            left: 0; /* К левому краю */
+            z-index: 1; /* Поверхность фона */
+            padding-right: 20px; /* Отступ справа от края окна */
+            padding-left: 20px; /* Отступ слева от края окна */
+        }
+        .logo {
+            height: 80px; /* Увеличена высота логотипа */
+            width: auto; /* Ширина автоматически подстраивается под высоту */
+            margin-right: 15px; /* Отступ между логотипом и кнопками */
+        }
+        button {
+            padding: 15px 30px; /* Увеличены внутренние отступы */
+            font-size: 18px; /* Увеличен размер шрифта */
+            border: none; /* Убираем границу */
+            border-radius: 5px; /* Скругление углов */
+            background-color: #1e1e1e; /* Темный цвет кнопки */
+            color: white; /* Цвет текста */
+            cursor: pointer; /* Курсор на указатель */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+            margin-left: 10px; /* Отступ между кнопками */
+        }
+        button:hover {
+            background-color: #555; /* Цвет при наведении */
+        }
+        .modal {
+            display: none; /* Скрываем модальное окно по умолчанию */
+            position: fixed; /* Фиксированная позиция */
+            top: 60px; /* Отступ от верхней части страницы (чтобы не задевать полоску) */
+            left: 0;
+            right: 0; /* Занимаем полную ширину */
+            bottom: 0; /* Занимаем полную высоту */
+            background-color: rgba(50, 50, 50, 0.9); /* Полупрозрачный фон */
+            padding: 20px; /* Внутренние отступы */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень */
+            color: white; /* Цвет текста */
+            z-index: 2; /* Перед полоской */
+            overflow-y: auto; /* Прокрутка по вертикали */
+        }
+        .modal.active {
+            display: block; /* Показываем модальное окно, если оно активно */
+        }
+        .modal-small {
+            display: none; /* Скрываем малое модальное окно по умолчанию */
+            position: fixed; /* Фиксированная позиция */
+            top: calc(50% - 100px); /* Центрируем по вертикали */
+            left: 50%; /* По центру экрана */
+            transform: translate(-50%, -50%); /* Центрируем по горизонтали */
+            background-color: rgba(50, 50, 50, 0.9); /* Полупрозрачный фон */
+            padding: 20px; /* Внутренние отступы */
+            border-radius: 5px; /* Скругление углов */
+            color: white; /* Цвет текста */
+            z-index: 2; /* Перед полоской */
+        }
+        .modal-small.active {
+            display: block; /* Показываем модальное окно, если оно активно */
+        }
+        .modal-background {
+            display: none; /* Скрываем фоновую подложку по умолчанию */
+            position: fixed; /* Фиксированная позиция */
+            top: 0;
+            left: 0;
+            width: 100%; /* Полная ширина */
+            height: 100%; /* Полная высота */
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+            z-index: 1; /* Под полоской и модальным окном */
+        }
+        .modal-background.active {
+            display: block; /* Показываем фоновую подложку, если она активна */
+        }
+    </style>
+    <script>
+        function showModal(modalId, isSmall = false) {
+            if (isSmall) {
+                document.getElementById(modalId).classList.add('active');
+            } else {
+                document.getElementById(modalId).classList.add('active');
+            }
+            document.getElementById('modalBackground').classList.add('active');
+        }
+
+        function hideModal(modalId, isSmall = false) {
+            if (isSmall) {
+                document.getElementById(modalId).classList.remove('active');
+            } else {
+                document.getElementById(modalId).classList.remove('active');
+            }
+            document.getElementById('modalBackground').classList.remove('active');
+        }
+
+        async function buttonClicked() {
+            showModal('mainModal');
+        }
+
+        async function updatesClicked() {
+            showModal('updatesModal');
+        }
+
+        async function downloadClicked() {
+            showModal('downloadModal', true); // true для маленького окна
+        }
+    </script>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <p>This is a sample website hosted on GitHub Pages.</p>
+    <div class="header">
+        <img src="/static/logo.png" alt="Логотип" class="logo"> <!-- Логотип -->
+        <button onclick="buttonClicked()">Главная</button> <!-- Первая кнопка -->
+        <button onclick="updatesClicked()">Обновления</button> <!-- Вторая кнопка -->
+        <button onclick="downloadClicked()">Скачать</button> <!-- Третья кнопка -->
+    </div>
+
+    <div id="modalBackground" class="modal-background" onclick="hideModal('mainModal'); hideModal('updatesModal'); hideModal('downloadModal', true);"></div>
+
+    <div id="mainModal" class="modal">
+        <h2>Главная</h2>
+        <p>Содержимое для главной кнопки.</p>
+        <button onclick="hideModal('mainModal')">Закрыть</button>
+    </div>
+
+    <div id="updatesModal" class="modal">
+        <h2>Обновления</h2>
+        <p>Содержимое для обновлений.</p>
+        <button onclick="hideModal('updatesModal')">Закрыть</button>
+    </div>
+
+    <div id="downloadModal" class="modal-small">
+        <h2>Скачать</h2>
+        <p>Содержимое для кнопки скачать.</p>
+        <button onclick="hideModal('downloadModal', true)">Закрыть</button>
+    </div>
 </body>
 </html>
