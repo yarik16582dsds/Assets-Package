@@ -10,6 +10,16 @@ header {
   color: #fff;
   padding: 20px;
   text-align: center;
+  position: relative;
+}
+
+header input[type="text"] {
+  padding: 10px;
+  width: calc(100% - 40px);
+  margin: 10px auto;
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 main {

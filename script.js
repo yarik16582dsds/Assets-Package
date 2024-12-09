@@ -1,27 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
   const assetsContainer = document.getElementById('assets-container');
+  const searchInput = document.getElementById('search-input');
 
   if (assetsContainer) {
-    // Главная страница
+    // Main page
     fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
-        data.forEach(asset => {
-          const assetElement = document.createElement('div');
-          assetElement.classList.add('asset-item');
-          assetElement.innerHTML = `
-            <div class="asset-text">
-              <h2>${asset.name}</h2>
-              <p>${asset.description}</p>
-              <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
-            </div>
-            <img src="${asset.image}" alt="${asset.name}" class="asset-image">
-          `;
-          assetsContainer.appendChild(assetElement);
+        displayAssets(data);
+
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.toLowerCase();
+          const filteredAssets = data.filter(asset =>
+            asset.name.toLowerCase().includes(query) ||
+            asset.description.toLowerCase().includes(query)
+          );
+          displayAssets(filteredAssets);
         });
       });
   } else {
-    // Страница ассета
+    // Asset details page
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
@@ -36,5 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('asset-image').src = asset.image;
         }
       });
+  }
+
+  function displayAssets(assets) {
+    assetsContainer.innerHTML = '';
+    assets.forEach(asset => {
+      const assetElement = document.createElement('div');
+      assetElement.classList.add('asset-item');
+      assetElement.innerHTML = `
+        <div class="asset-text">
+          <h2>${asset.name}</h2>
+          <p>${asset.description}</p>
+          <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
+        </div>
+        <img src="${asset.image}" alt="${asset.name}" class="asset-image">
+      `;
+      assetsContainer.appendChild(assetElement);
+    });
   }
 });
