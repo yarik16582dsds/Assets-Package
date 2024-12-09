@@ -40,6 +40,10 @@
         .form-container button:hover {
             background-color: #555;
         }
+        .download-link {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -58,13 +62,26 @@
             <label for="image">Картинка:</label>
             <input type="file" id="image" name="image" accept="image/*" required>
 
+            <label for="file">Файл для скачивания:</label>
+            <input type="file" id="file" name="file" required>
+
             <button type="submit">Сохранить</button>
         </form>
+        <a id="downloadLink" class="download-link" href="#" download>Скачать файл</a>
     </div>
     <script>
         document.getElementById('addPageForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            // Здесь вы можете добавить код для обработки формы, например, отправку данных на сервер
+            const fileInput = document.getElementById('file');
+            const file = fileInput.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = url;
+                downloadLink.download = file.name;
+                downloadLink.style.display = 'inline';
+                downloadLink.textContent = `Скачать ${file.name}`;
+            }
             alert('Страница успешно добавлена!');
         });
     </script>
