@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
           assetElement.innerHTML = `
             <h2>${asset.name}</h2>
             <p>${asset.description}</p>
+            <img src="${asset.image}" alt="${asset.name}" width="100">
             <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
           `;
           assetsContainer.appendChild(assetElement);
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('asset-name').textContent = asset.name;
           document.getElementById('asset-description').textContent = asset.description;
           document.getElementById('asset-download').href = asset.file;
+          document.getElementById('asset-image').src = asset.image;
         }
       });
   }
