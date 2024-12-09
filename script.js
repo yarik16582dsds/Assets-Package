@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (assetsContainer) {
     // Главная страница
-    fetch('/data/assets.json')
+    fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
         data.forEach(asset => {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
-    fetch('/data/assets.json')
+    fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
         const asset = data.find(item => item.id == assetId);

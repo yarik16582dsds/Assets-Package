@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "name": "Asset 1",
-    "description": "ScriptEditorWindow",
-    "file": "assets/unity/ScriptEditorWindow.unitypackage"
+    "name": "ScriptEditorWindow",
+    "description": "Description of ScriptEditorWindow",
+    "file": "assets/ScriptEditorWindow.unitypackage"
   },
   {
     "id": 2,
     "name": "Asset 2",
     "description": "Description of Asset 2",
-    "file": "assets/unity/asset2.unitypackage"
+    "file": "assets/asset2.unitypackage"
   }
 ]
