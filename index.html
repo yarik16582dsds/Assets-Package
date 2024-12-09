@@ -65,21 +65,6 @@
         .modal.active {
             display: block; /* Показываем модальное окно, если оно активно */
         }
-        .modal-small {
-            display: none; /* Скрываем малое модальное окно по умолчанию */
-            position: fixed; /* Фиксированная позиция */
-            top: calc(50% - 100px); /* Центрируем по вертикали */
-            left: 50%; /* По центру экрана */
-            transform: translate(-50%, -50%); /* Центрируем по горизонтали */
-            background-color: rgba(50, 50, 50, 0.9); /* Полупрозрачный фон */
-            padding: 20px; /* Внутренние отступы */
-            border-radius: 5px; /* Скругление углов */
-            color: white; /* Цвет текста */
-            z-index: 2; /* Перед полоской */
-        }
-        .modal-small.active {
-            display: block; /* Показываем модальное окно, если оно активно */
-        }
         .modal-background {
             display: none; /* Скрываем фоновую подложку по умолчанию */
             position: fixed; /* Фиксированная позиция */
@@ -95,34 +80,18 @@
         }
     </style>
     <script>
-        function showModal(modalId, isSmall = false) {
-            if (isSmall) {
-                document.getElementById(modalId).classList.add('active');
-            } else {
-                document.getElementById(modalId).classList.add('active');
-            }
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
             document.getElementById('modalBackground').classList.add('active');
         }
 
-        function hideModal(modalId, isSmall = false) {
-            if (isSmall) {
-                document.getElementById(modalId).classList.remove('active');
-            } else {
-                document.getElementById(modalId).classList.remove('active');
-            }
+        function hideModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
             document.getElementById('modalBackground').classList.remove('active');
         }
 
         async function buttonClicked() {
             showModal('mainModal');
-        }
-
-        async function updatesClicked() {
-            showModal('updatesModal');
-        }
-
-        async function downloadClicked() {
-            showModal('downloadModal', true); // true для маленького окна
         }
     </script>
 </head>
@@ -130,28 +99,14 @@
     <div class="header">
         <img src="/static/logo.png" alt="Логотип" class="logo"> <!-- Логотип -->
         <button onclick="buttonClicked()">Главная</button> <!-- Первая кнопка -->
-        <button onclick="updatesClicked()">Обновления</button> <!-- Вторая кнопка -->
-        <button onclick="downloadClicked()">Скачать</button> <!-- Третья кнопка -->
     </div>
 
-    <div id="modalBackground" class="modal-background" onclick="hideModal('mainModal'); hideModal('updatesModal'); hideModal('downloadModal', true);"></div>
+    <div id="modalBackground" class="modal-background" onclick="hideModal('mainModal')"></div>
 
     <div id="mainModal" class="modal">
         <h2>Главная</h2>
         <p>Содержимое для главной кнопки.</p>
         <button onclick="hideModal('mainModal')">Закрыть</button>
-    </div>
-
-    <div id="updatesModal" class="modal">
-        <h2>Обновления</h2>
-        <p>Содержимое для обновлений.</p>
-        <button onclick="hideModal('updatesModal')">Закрыть</button>
-    </div>
-
-    <div id="downloadModal" class="modal-small">
-        <h2>Скачать</h2>
-        <p>Содержимое для кнопки скачать.</p>
-        <button onclick="hideModal('downloadModal', true)">Закрыть</button>
     </div>
 </body>
 </html>
