@@ -40,15 +40,17 @@
             cursor: pointer;
         }
         .add-button {
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 10px 20px;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             background-color: #1e1e1e;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
         .add-button:hover {
             background-color: #555;
@@ -87,14 +89,16 @@
             location.reload();
         }
 
-        function addPage(title, imageUrl, pageUrl) {
+        function addPage(title, imageUrl, description, version, fileUrl, fileName) {
             const pageList = document.getElementById('pageList');
             const pageItem = document.createElement('div');
             pageItem.className = 'page-item';
             pageItem.innerHTML = `
                 <h2>${title}</h2>
                 <img src="${imageUrl}" alt="${title}">
-                <a href="${pageUrl}" target="_blank">Перейти к странице</a>
+                <p>${description}</p>
+                <p>Версия: ${version}</p>
+                <a href="${fileUrl}" download="${fileName}">Скачать файл</a>
             `;
             pageList.appendChild(pageItem);
         }

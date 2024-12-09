@@ -79,89 +79,10 @@
                 const imageUrl = URL.createObjectURL(imageFile);
                 const fileUrl = URL.createObjectURL(file);
 
-                // Создаем новую страницу
-                const newPage = document.createElement('div');
-                newPage.innerHTML = `
-                    <h2>${title}</h2>
-                    <img src="${imageUrl}" alt="${title}">
-                    <p>${description}</p>
-                    <p>Версия: ${version}</p>
-                    <a href="${fileUrl}" download="${file.name}">Скачать файл</a>
-                `;
-                newPage.style.display = 'none';
-                document.body.appendChild(newPage);
-
-                // Создаем новый HTML файл для новой страницы
-                const newPageContent = `
-                    <!DOCTYPE html>
-                    <html lang="ru">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>${title}</title>
-                        <style>
-                            body {
-                                background-color: #f4f4f4;
-                                font-family: Arial, sans-serif;
-                                text-align: center;
-                                margin: 0;
-                                padding: 20px;
-                            }
-                            .content {
-                                background-color: white;
-                                padding: 20px;
-                                border-radius: 10px;
-                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                                max-width: 600px;
-                                margin: auto;
-                            }
-                            .content img {
-                                max-width: 100%;
-                                height: auto;
-                                margin-top: 10px;
-                            }
-                            .content a {
-                                display: block;
-                                margin-top: 10px;
-                                color: #1e1e1e;
-                                text-decoration: none;
-                                background-color: #fff;
-                                padding: 10px;
-                                border-radius: 5px;
-                                border: 1px solid #ccc;
-                                transition: background-color 0.3s;
-                            }
-                            .content a:hover {
-                                background-color: #f0f0f0;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="content">
-                            <h2>${title}</h2>
-                            <img src="${imageUrl}" alt="${title}">
-                            <p>${description}</p>
-                            <p>Версия: ${version}</p>
-                            <a href="${fileUrl}" download="${file.name}">Скачать файл</a>
-                        </div>
-                    </body>
-                    </html>
-                `;
-
-                // Создаем blob и ссылку для скачивания новой страницы
-                const blob = new Blob([newPageContent], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `${title.replace(/ /g, '_')}.html`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-
                 // Добавляем ссылку на новую страницу на главную страницу
-                const pageUrl = `${title.replace(/ /g, '_')}.html`; // URL новой страницы
+                const fileName = file.name;
                 if (window.opener && window.opener.addPage) {
-                    window.opener.addPage(title, imageUrl, pageUrl);
+                    window.opener.addPage(title, imageUrl, description, version, fileUrl, fileName);
                 }
 
                 alert('Страница успешно добавлена!');
