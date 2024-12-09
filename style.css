@@ -36,7 +36,6 @@ main {
   max-width: 300px; /* Увеличенное изображение */
   height: auto;
   margin-left: 20px;
-  transform: scale(2); /* Увеличение изображения в два раза */
 }
 
 .asset-item h2 {
