@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (asset) {
           document.getElementById('asset-name').textContent = asset.name;
           document.getElementById('asset-description').textContent = asset.description;
-          document.getElementById('asset-download').href = asset.file;
+          document.getElementById('asset-download').href = `https://drive.google.com/uc?export=download&id=${asset.file}`;
           document.getElementById('asset-image').src = asset.image;
         }
       });
