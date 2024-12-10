@@ -13,15 +13,6 @@ header {
   position: relative;
 }
 
-header input[type="text"] {
-  padding: 10px;
-  width: calc(100% - 40px);
-  margin: 10px auto;
-  display: block;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
 header button {
   position: absolute;
   right: 20px;
@@ -36,6 +27,15 @@ header button {
 
 header button:hover {
   background-color: #0056b3;
+}
+
+header input[type="text"] {
+  padding: 10px;
+  width: calc(100% - 40px);
+  margin: 10px auto;
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 main {
