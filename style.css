@@ -33,6 +33,7 @@ main {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
   display: flex;
   align-items: center;
 }
@@ -45,6 +46,8 @@ main {
   max-width: 300px; /* Increased image size */
   height: auto;
   margin-left: 20px;
+=======
+>>>>>>> parent of ea1f2a8 (34)
 }
 
 .asset-item h2 {
@@ -74,9 +77,13 @@ a:hover {
   text-decoration: underline;
 }
 
-#asset-image {
+img {
   display: block;
   margin: 10px 0;
+<<<<<<< HEAD
   max-width: 50%; /* Decreased image size */
+=======
+  max-width: 100%;
+>>>>>>> parent of ea1f2a8 (34)
   height: auto;
 }

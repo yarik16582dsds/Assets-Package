@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Main page
     fetch('assets.json')
       .then(response => response.json())
+<<<<<<< HEAD
       .then(assets => {
         assets.forEach(asset => {
           const assetItem = document.createElement('div');
@@ -22,6 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
             <h2>${asset.name}</h2>
             <p>${asset.description}</p>
             <a href="asset-details.html?id=${asset.id}" class="view-details">View Details</a>
+=======
+      .then(data => {
+        data.forEach(asset => {
+          const assetElement = document.createElement('div');
+          assetElement.classList.add('asset-item');
+          assetElement.innerHTML = `
+            <h2>${asset.name}</h2>
+            <p>${asset.description}</p>
+            <img src="${asset.image}" alt="${asset.name}" width="100">
+            <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
+>>>>>>> parent of ea1f2a8 (34)
           `;
 
           const assetImage = document.createElement('img');
