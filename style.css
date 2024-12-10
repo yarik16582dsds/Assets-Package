@@ -81,3 +81,16 @@ a:hover {
   max-width: 50%; /* Уменьшенное изображение */
   height: auto;
 }
+
+.asset-details-container {
+  display: flex;
+  align-items: center;
+}
+
+.asset-additional-info {
+  margin-left: 20px;
+}
+
+.asset-additional-info p {
+  margin: 5px 0;
+}

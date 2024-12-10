@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('asset-description').textContent = asset.description;
           document.getElementById('asset-download').href = asset.file;
           document.getElementById('asset-image').src = asset.image;
+          document.getElementById('asset-version').textContent = `Version: ${asset.version}`;
+          document.getElementById('asset-size').textContent = `Size: ${asset.size}`;
         }
       });
   }
