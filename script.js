@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const registerForm = document.getElementById('register-form');
+  const loginForm = document.getElementById('login-form');
   const messageDiv = document.getElementById('message');
 
   if (registerForm) {
@@ -8,19 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Fetch existing users
+      // Получение существующих пользователей
       fetch('/Assets-Package/data/users.json')
         .then(response => response.json())
         .then(data => {
           const existingUser = data.find(user => user.username === username);
           if (existingUser) {
-            messageDiv.textContent = 'Username already exists. Please choose another one.';
+            messageDiv.textContent = 'Имя пользователя уже существует. Пожалуйста, выберите другое.';
           } else {
-            // Add new user
+            // Добавление нового пользователя
             const newUser = { username, password };
             data.push(newUser);
 
-            // Save updated users data
+            // Сохранение обновленных данных пользователей
             fetch('/Assets-Package/data/users.json', {
               method: 'PUT',
               headers: {
@@ -30,18 +31,46 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.json())
             .then(() => {
-              messageDiv.textContent = 'Registration successful!';
+              messageDiv.textContent = 'Регистрация успешна!';
               registerForm.reset();
             })
             .catch(error => {
-              messageDiv.textContent = 'Error saving data. Please try again.';
-              console.error('Error:', error);
+              messageDiv.textContent = 'Ошибка сохранения данных. Пожалуйста, попробуйте снова.';
+              console.error('Ошибка:', error);
             });
           }
         })
         .catch(error => {
-          messageDiv.textContent = 'Error fetching data. Please try again.';
-          console.error('Error:', error);
+          messageDiv.textContent = 'Ошибка получения данных. Пожалуйста, попробуйте снова.';
+          console.error('Ошибка:', error);
+        });
+    });
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Получение существующих пользователей
+      fetch('/Assets-Package/data/users.json')
+        .then(response => response.json())
+        .then(data => {
+          const user = data.find(user => user.username === username && user.password === password);
+          if (user) {
+            messageDiv.textContent = 'Вход успешен!';
+            // Перенаправление на главную страницу или другую страницу после успешного входа
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 1000);
+          } else {
+            messageDiv.textContent = 'Неверное имя пользователя или пароль.';
+          }
+        })
+        .catch(error => {
+          messageDiv.textContent = 'Ошибка получения данных. Пожалуйста, попробуйте снова.';
+          console.error('Ошибка:', error);
         });
     });
   }
@@ -50,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-input');
 
   if (assetsContainer) {
-    // Main page
+    // Главная страница
     fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
@@ -66,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
   } else {
-    // Asset details page
+    // Страница деталей актива
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
@@ -92,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="asset-text">
           <h2>${asset.name}</h2>
           <p>${asset.description}</p>
-          <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
+          <a href="asset-page.html?id=${asset.id}" class="view-details">Подробнее</a>
         </div>
         <img src="${asset.image}" alt="${asset.name}" class="asset-image">
       `;

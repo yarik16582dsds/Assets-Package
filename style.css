@@ -13,7 +13,8 @@ header {
   position: relative;
 }
 
-header .register-button {
+header .register-button,
+header .login-button {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -25,7 +26,12 @@ header .register-button {
   font-size: 16px;
 }
 
-header .register-button:hover {
+header .register-button {
+  right: 140px; /* Сдвигаем кнопку регистрации влево */
+}
+
+header .register-button:hover,
+header .login-button:hover {
   background-color: #0056b3;
 }
 
