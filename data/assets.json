@@ -3,14 +3,14 @@
     "id": 1,
     "name": "ScriptEditorWindow",
     "description": "Description of ScriptEditorWindow",
-    "file": "1vUJdsffNOMq_YACrJuWFz6UWbJI_JKIu",
+    "file": "https://drive.google.com/uc?export=download&id=1vUJdsffNOMq_YACrJuWFz6UWbJI_JKIu",
     "image": "images/ScriptEditorWindow.png"
   },
   {
     "id": 2,
     "name": "Asset 2",
     "description": "Description of Asset 2",
-    "file": "2abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP",
+    "file": "https://drive.google.com/uc?export=download&id=2abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP",
     "image": "images/asset2.png"
   }
 ]
