@@ -17,7 +17,6 @@ header .register-button,
 header .login-button {
   position: absolute;
   top: 20px;
-  right: 20px;
   padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
@@ -27,7 +26,11 @@ header .login-button {
 }
 
 header .register-button {
-  right: 140px; /* Сдвигаем кнопку регистрации влево */
+  right: 20px; /* Кнопка регистрации в правом верхнем углу */
+}
+
+header .login-button {
+  right: 160px; /* Кнопка входа левее кнопки регистрации */
 }
 
 header .register-button:hover,
