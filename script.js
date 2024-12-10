@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const registerForm = document.getElementById('register-form');
   const loginForm = document.getElementById('login-form');
   const messageDiv = document.getElementById('message');
+  const usernameDisplay = document.getElementById('username-display');
 
   if (registerForm) {
     registerForm.addEventListener('submit', (event) => {
@@ -60,6 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const user = data.find(user => user.username === username && user.password === password);
           if (user) {
             messageDiv.textContent = 'Вход успешен!';
+            // Сохранение имени пользователя в localStorage
+            localStorage.setItem('loggedInUser', username);
             // Перенаправление на главную страницу или другую страницу после успешного входа
             setTimeout(() => {
               window.location.href = 'index.html';
@@ -94,6 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
           displayAssets(filteredAssets);
         });
       });
+
+    // Отображение имени пользователя, если он вошел в систему
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      usernameDisplay.textContent = loggedInUser;
+    }
   } else {
     // Страница деталей актива
     const urlParams = new URLSearchParams(window.location.search);
