@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (assetsContainer) {
     // Главная страница
-    fetch('/Assets-Package/data/assets.json')
+    fetch('/data/assets.json')
       .then(response => response.json())
       .then(data => {
         data.forEach(asset => {
@@ -12,15 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
           assetElement.innerHTML = `
             <h2>${asset.name}</h2>
             <p>${asset.description}</p>
-            <img src="${asset.image}" alt="${asset.name}" width="100">
             <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
           `;
           assetsContainer.appendChild(assetElement);
-@ -30,8 +31,9 @@
+        });
+      });
+  } else {
+    // Страница ассета
+    const urlParams = new URLSearchParams(window.location.search);
+    const assetId = urlParams.get('id');
+
+    fetch('/data/assets.json')
+      .then(response => response.json())
+      .then(data => {
+        const asset = data.find(item => item.id == assetId);
+        if (asset) {
           document.getElementById('asset-name').textContent = asset.name;
           document.getElementById('asset-description').textContent = asset.description;
           document.getElementById('asset-download').href = asset.file;
-          document.getElementById('asset-image').src = asset.image;
         }
       });
   }
