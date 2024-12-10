@@ -86,11 +86,15 @@ a:hover {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .asset-additional-info {
+  position: absolute;
+  top: 0;
+  right: 0;
   margin-left: 20px;
-  flex: 1;
+  margin-top: 20px;
 }
 
 .asset-additional-info p {
