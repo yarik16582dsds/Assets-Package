@@ -84,11 +84,13 @@ a:hover {
 
 .asset-details-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 .asset-additional-info {
-  margin-bottom: 20px;
+  margin-left: 20px;
+  flex: 1;
 }
 
 .asset-additional-info p {
