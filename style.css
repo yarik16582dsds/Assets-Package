@@ -78,7 +78,7 @@ a:hover {
 #asset-image {
   display: block;
   margin: 10px 0;
-  max-width: 100%; /* Уменьшенное изображение */
+  max-width: 50%; /* Уменьшенное изображение */
   height: auto;
 }
 
@@ -99,22 +99,4 @@ a:hover {
 
 .asset-additional-info p {
   margin: 5px 0;
-}
-
-/* Медиа-запросы для адаптивного дизайна */
-@media (max-width: 768px) {
-  .asset-details-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .asset-additional-info {
-    position: static;
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  #asset-image {
-    max-width: 80%;
-  }
 }
