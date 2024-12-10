@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "ScriptEditorWindow",
+    "description": "Description of ScriptEditorWindow",
+    "file": "assets/ScriptEditorWindow.unitypackage"
+    "file": "assets/ScriptEditorWindow.unitypackage",
+    "image": "images/ScriptEditorWindow.png"
+  },
+  {
+    "id": 2,
+    "name": "Asset 2",
+    "description": "Description of Asset 2",
+    "file": "assets/asset2.unitypackage"
+    "file": "assets/asset2.unitypackage",
+    "image": "images/asset2.png"
+  }
+]
