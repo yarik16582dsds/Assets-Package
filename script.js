@@ -1,4 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const registerForm = document.getElementById('register-form');
+  const messageDiv = document.getElementById('message');
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Fetch existing users
+      fetch('/Assets-Package/data/users.json')
+        .then(response => response.json())
+        .then(data => {
+          const existingUser = data.find(user => user.username === username);
+          if (existingUser) {
+            messageDiv.textContent = 'Username already exists. Please choose another one.';
+          } else {
+            // Add new user
+            const newUser = { username, password };
+            data.push(newUser);
+
+            // Save updated users data
+            fetch('/Assets-Package/data/users.json', {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(() => {
+              messageDiv.textContent = 'Registration successful!';
+              registerForm.reset();
+            })
+            .catch(error => {
+              messageDiv.textContent = 'Error saving data. Please try again.';
+              console.error('Error:', error);
+            });
+          }
+        })
+        .catch(error => {
+          messageDiv.textContent = 'Error fetching data. Please try again.';
+          console.error('Error:', error);
+        });
+    });
+  }
+
   const assetsContainer = document.getElementById('assets-container');
   const searchInput = document.getElementById('search-input');
 
