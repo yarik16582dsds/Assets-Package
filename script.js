@@ -10,50 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Получение существующих пользователей
-      fetch('/Assets-Package/data/users.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
+      firebase.auth().createUserWithEmailAndPassword(username, password)
+        .then((userCredential) => {
+          messageDiv.textContent = 'Регистрация успешна!';
+          registerForm.reset();
         })
-        .then(data => {
-          const existingUser = data.find(user => user.username === username);
-          if (existingUser) {
-            messageDiv.textContent = 'Имя пользователя уже существует. Пожалуйста, выберите другое.';
-          } else {
-            // Добавление нового пользователя
-            const newUser = { username, password };
-            data.push(newUser);
-
-            // Сохранение обновленных данных пользователей
-            fetch('/Assets-Package/data/users.json', {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-            })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then(() => {
-              messageDiv.textContent = 'Регистрация успешна!';
-              registerForm.reset();
-            })
-            .catch(error => {
-              messageDiv.textContent = 'Ошибка сохранения данных. Пожалуйста, попробуйте снова.';
-              console.error('Ошибка:', error);
-            });
-          }
-        })
-        .catch(error => {
-          messageDiv.textContent = 'Ошибка получения данных. Пожалуйста, попробуйте снова.';
-          console.error('Ошибка:', error);
+        .catch((error) => {
+          messageDiv.textContent = 'Ошибка регистрации: ' + error.message;
         });
     });
   }
@@ -64,31 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Получение существующих пользователей
-      fetch('/Assets-Package/data/users.json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
+      firebase.auth().signInWithEmailAndPassword(username, password)
+        .then((userCredential) => {
+          messageDiv.textContent = 'Вход успешен!';
+          localStorage.setItem('loggedInUser', username);
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
         })
-        .then(data => {
-          const user = data.find(user => user.username === username && user.password === password);
-          if (user) {
-            messageDiv.textContent = 'Вход успешен!';
-            // Сохранение имени пользователя в localStorage
-            localStorage.setItem('loggedInUser', username);
-            // Перенаправление на главную страницу или другую страницу после успешного входа
-            setTimeout(() => {
-              window.location.href = 'index.html';
-            }, 1000);
-          } else {
-            messageDiv.textContent = 'Неверное имя пользователя или пароль.';
-          }
-        })
-        .catch(error => {
-          messageDiv.textContent = 'Ошибка получения данных. Пожалуйста, попробуйте снова.';
-          console.error('Ошибка:', error);
+        .catch((error) => {
+          messageDiv.textContent = 'Ошибка входа: ' + error.message;
         });
     });
   }
