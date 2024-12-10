@@ -8,9 +8,9 @@
   },
   {
     "id": 2,
-    "name": "Localization 1.0",
-    "description": "Description of Localization 1.0",
-    "file": "https://drive.google.com/uc?export=download&id=1_Kpm6b-RsVjQm45NiHyMmHKKPoE1AnTl",
-    "image": "images/Localization 1.0.png"
+    "name": "Asset 2",
+    "description": "Description of Asset 2",
+    "file": "https://drive.google.com/uc?export=download&id=2abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP",
+    "image": "images/asset2.png"
   }
 ]

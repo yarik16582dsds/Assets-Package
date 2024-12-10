@@ -1,81 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const registerForm = document.getElementById('register-form');
-  const loginForm = document.getElementById('login-form');
-  const messageDiv = document.getElementById('message');
-  const usernameDisplay = document.getElementById('username-display');
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-
-  // Initialize Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-
-  if (registerForm) {
-    registerForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          // Сохранение дополнительных данных пользователя в Firestore
-          db.collection('users').doc(user.uid).set({
-            email: user.email,
-            displayName: user.displayName || email.split('@')[0],
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          messageDiv.textContent = 'Регистрация успешна!';
-          registerForm.reset();
-        })
-        .catch((error) => {
-          messageDiv.textContent = 'Ошибка регистрации: ' + error.message;
-        });
-    });
-  }
-
-  if (loginForm) {
-    loginForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          localStorage.setItem('loggedInUser', user.email);
-          messageDiv.textContent = 'Вход успешен!';
-          setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 1000);
-        })
-        .catch((error) => {
-          messageDiv.textContent = 'Ошибка входа: ' + error.message;
-        });
-    });
-  }
-
   const assetsContainer = document.getElementById('assets-container');
   const searchInput = document.getElementById('search-input');
 
   if (assetsContainer) {
-    // Главная страница
+    // Main page
     fetch('/Assets-Package/data/assets.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         displayAssets(data);
 
@@ -87,28 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
           );
           displayAssets(filteredAssets);
         });
-      })
-      .catch(error => {
-        console.error('Ошибка:', error);
       });
-
-    // Отображение имени пользователя, если он вошел в систему
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      usernameDisplay.textContent = loggedInUser;
-    }
   } else {
-    // Страница деталей актива
+    // Asset details page
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
     fetch('/Assets-Package/data/assets.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         const asset = data.find(item => item.id == assetId);
         if (asset) {
@@ -117,9 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('asset-download').href = asset.file;
           document.getElementById('asset-image').src = asset.image;
         }
-      })
-      .catch(error => {
-        console.error('Ошибка:', error);
       });
   }
 
@@ -132,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="asset-text">
           <h2>${asset.name}</h2>
           <p>${asset.description}</p>
-          <a href="asset-page.html?id=${asset.id}" class="view-details">Подробнее</a>
+          <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
         </div>
         <img src="${asset.image}" alt="${asset.name}" class="asset-image">
       `;
