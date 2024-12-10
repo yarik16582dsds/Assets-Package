@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (addButton) {
     addButton.addEventListener('click', () => {
-      window.location.href = 'add-asset.html';
+      window.location.href = '/Assets-Package/add-asset.html';
     });
   }
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Этот шаг требует серверной логики, так как GitHub Pages не поддерживает запись файлов
           // В реальном приложении вы бы отправили данные на сервер для сохранения
           console.log('New asset added:', updatedData);
-          window.location.href = 'index.html';
+          window.location.href = '/Assets-Package/index.html';
         });
     });
   }
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="asset-text">
           <h2>${asset.name}</h2>
           <p>${asset.description}</p>
-          <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
+          <a href="/Assets-Package/asset-page.html?id=${asset.id}" class="view-details">View Details</a>
         </div>
         <img src="${asset.image}" alt="${asset.name}" class="asset-image">
       `;
