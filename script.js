@@ -12,7 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Получение существующих пользователей
       fetch('/Assets-Package/data/users.json')
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
         .then(data => {
           const existingUser = data.find(user => user.username === username);
           if (existingUser) {
@@ -30,7 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
               },
               body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
             .then(() => {
               messageDiv.textContent = 'Регистрация успешна!';
               registerForm.reset();
@@ -56,7 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Получение существующих пользователей
       fetch('/Assets-Package/data/users.json')
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
         .then(data => {
           const user = data.find(user => user.username === username && user.password === password);
           if (user) {
@@ -84,7 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (assetsContainer) {
     // Главная страница
     fetch('/Assets-Package/data/assets.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         displayAssets(data);
 
@@ -96,6 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
           );
           displayAssets(filteredAssets);
         });
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
       });
 
     // Отображение имени пользователя, если он вошел в систему
@@ -109,7 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const assetId = urlParams.get('id');
 
     fetch('/Assets-Package/data/assets.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         const asset = data.find(item => item.id == assetId);
         if (asset) {
@@ -118,6 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('asset-download').href = asset.file;
           document.getElementById('asset-image').src = asset.image;
         }
+      })
+      .catch(error => {
+        console.error('Ошибка:', error);
       });
   }
 
