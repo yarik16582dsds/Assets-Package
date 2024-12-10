@@ -4,26 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (assetsContainer) {
     // Главная страница
     fetch('/data/assets.json')
+    fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
         data.forEach(asset => {
-          const assetElement = document.createElement('div');
-          assetElement.classList.add('asset-item');
-          assetElement.innerHTML = `
-            <h2>${asset.name}</h2>
-            <p>${asset.description}</p>
-            <a href="asset-page.html?id=${asset.id}">View Details</a>
-            <a href="asset-page.html?id=${asset.id}" class="view-details">View Details</a>
-          `;
-          assetsContainer.appendChild(assetElement);
-        });
-      });
-  } else {
-    // Страница ассета
+@ -22,16 +22,16 @@
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
     fetch('/data/assets.json')
+    fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
         const asset = data.find(item => item.id == assetId);
