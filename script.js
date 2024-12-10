@@ -7,11 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (registerForm) {
     registerForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      firebase.auth().createUserWithEmailAndPassword(username, password)
+      firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
+          const user = userCredential.user;
+          // Сохранение дополнительных данных пользователя в Firestore
+          firebase.firestore().collection('users').doc(user.uid).set({
+            email: user.email,
+            displayName: user.displayName || email.split('@')[0],
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
           messageDiv.textContent = 'Регистрация успешна!';
           registerForm.reset();
         })
@@ -24,13 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loginForm) {
     loginForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      firebase.auth().signInWithEmailAndPassword(username, password)
+      firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+          const user = userCredential.user;
+          localStorage.setItem('loggedInUser', user.email);
           messageDiv.textContent = 'Вход успешен!';
-          localStorage.setItem('loggedInUser', username);
           setTimeout(() => {
             window.location.href = 'index.html';
           }, 1000);
