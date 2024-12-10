@@ -1,3 +1,22 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
 document.addEventListener('DOMContentLoaded', () => {
   const registerForm = document.getElementById('register-form');
   const loginForm = document.getElementById('login-form');
@@ -10,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           // Сохранение дополнительных данных пользователя в Firestore
-          firebase.firestore().collection('users').doc(user.uid).set({
+          setDoc(doc(db, 'users', user.uid), {
             email: user.email,
             displayName: user.displayName || email.split('@')[0],
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            createdAt: serverTimestamp()
           });
           messageDiv.textContent = 'Регистрация успешна!';
           registerForm.reset();
@@ -34,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           localStorage.setItem('loggedInUser', user.email);
