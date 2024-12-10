@@ -1,6 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
   const assetsContainer = document.getElementById('assets-container');
   const searchInput = document.getElementById('search-input');
+  const addButton = document.getElementById('add-button');
+  const addAssetForm = document.getElementById('add-asset-form');
+
+  if (addButton) {
+    addButton.addEventListener('click', () => {
+      window.location.href = 'add-asset.html';
+    });
+  }
+
+  if (addAssetForm) {
+    addAssetForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const description = document.getElementById('description').value;
+      const image = document.getElementById('image').value;
+      const file = document.getElementById('file').value;
+
+      const newAsset = {
+        id: Date.now(), // Уникальный идентификатор
+        name,
+        description,
+        image,
+        file
+      };
+
+      fetch('/Assets-Package/data/assets.json')
+        .then(response => response.json())
+        .then(data => {
+          data.push(newAsset);
+          return data;
+        })
+        .then(updatedData => {
+          // Сохраните обновленные данные в файл assets.json
+          // Этот шаг требует серверной логики, так как GitHub Pages не поддерживает запись файлов
+          // В реальном приложении вы бы отправили данные на сервер для сохранения
+          console.log('New asset added:', updatedData);
+          window.location.href = 'index.html';
+        });
+    });
+  }
 
   if (assetsContainer) {
     // Main page
