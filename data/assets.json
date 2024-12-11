@@ -16,5 +16,14 @@
     "image": "images/Localization 1.0.png",
     "version": "1.0",
     "size": "1,55MB"
+  },
+  {
+    "id": 3,
+    "name": "GraphicsSettings",
+    "description": "Description of GraphicsSettings",
+    "file": "https://drive.google.com/uc?export=download&id=1vxu0uUH16b7pdAFL8du4-MUC47fpCNti",
+    "image": "images/GraphicsSettings.png",
+    "version": "1.0",
+    "size": "3,32MB"
   }
 ]
