@@ -47,15 +47,18 @@ main {
 }
 
 .asset-item .asset-image {
-  max-width: 200px; /* Размер по умолчанию для главной страницы */
+  max-width: 200px;
   height: auto;
   margin-left: 0;
 }
 
-
 .asset-item h2 {
   margin-top: 0;
   margin-bottom: 5px;
+}
+
+.asset-item p { /* Добавлено для жирного шрифта описания */
+  font-weight: bold;
 }
 
 .view-details, .download-button {
@@ -115,11 +118,11 @@ a:hover {
 
   .main-page-assets .asset-item .asset-image {
     max-width: 250px;
-    height: 150;
+    height: 100px;
     object-fit: cover;
   }
 
-  .asset-details-container img { /* более точный селектор для страницы с деталями */
+  .asset-details-container img {
     max-width: 300px;
     height: 200px;
     object-fit: cover;
