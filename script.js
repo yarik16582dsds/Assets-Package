@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const assetsContainer = document.getElementById('assets-container');
   const searchInput = document.getElementById('search-input');
 
-  if (assetsContainer) { // Главная страница
+  if (assetsContainer) {
+    // Main page
     fetch('/Assets-Package/data/assets.json')
       .then(response => response.json())
       .then(data => {
@@ -17,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
           displayAssets(filteredAssets);
         });
       });
-  } else { // Страница с деталями актива
+  } else {
+    // Asset details page
     const urlParams = new URLSearchParams(window.location.search);
     const assetId = urlParams.get('id');
 
@@ -32,10 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('asset-image').src = asset.image;
           document.getElementById('asset-version').textContent = `Version: ${asset.version}`;
           document.getElementById('asset-size').textContent = `Size: ${asset.size}`;
-        } else {
-          // Обработка случая, когда актив не найден
-          console.error("Asset not found!");
-          // Можно добавить сообщение об ошибке пользователю
         }
       });
   }

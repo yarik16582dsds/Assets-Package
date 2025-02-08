@@ -36,18 +36,16 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  box-sizing: border-box;
 }
 
-.asset-text {
+.asset-item .asset-text {
   flex: 1;
 }
 
-.asset-image {
-  max-width: 100%;
+.asset-item .asset-image {
+  max-width: 300px; /* Увеличенное изображение */
   height: auto;
-  display: block;
+  margin-left: 20px;
 }
 
 .asset-item h2 {
@@ -80,7 +78,7 @@ a:hover {
 #asset-image {
   display: block;
   margin: 10px 0;
-  max-width: 100%;
+  max-width: 50%; /* Уменьшенное изображение */
   height: auto;
 }
 
