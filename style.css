@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4;  Убрано, чтобы не конфликтовало с цветом main */
   overflow-x: hidden;
 }
 
@@ -26,6 +26,7 @@ header input[type="text"] {
 
 main {
   padding: 10px;
+  background-color: #31D7ED;
 }
 
 .asset-item {
@@ -55,6 +56,10 @@ main {
 .asset-item h2 {
   margin-top: 0;
   margin-bottom: 5px;
+}
+
+.asset-item p {
+  font-weight: normal; /* вернули обычный шрифт для описания на главной */
 }
 
 .view-details, .download-button {
@@ -104,10 +109,9 @@ a:hover {
   margin: 5px 0;
 }
 
-#asset-description { /* Селектор для жирного шрифта описания на странице деталей */
+#asset-description {
   font-weight: bold;
 }
-
 
 /* Медиа-запросы для адаптации под мобильные устройства */
 @media (max-width: 768px) {
@@ -117,7 +121,7 @@ a:hover {
   }
 
   .main-page-assets .asset-item .asset-image {
-    max-width: 250px;
+    max-width: 150px;
     height: 100px;
     object-fit: cover;
   }
