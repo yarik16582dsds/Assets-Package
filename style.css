@@ -3,59 +3,65 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
 }
 
 header {
   background-color: #333;
   color: #fff;
-  padding: 20px;
+  padding: 10px; /* Уменьшено для мобильных */
   text-align: center;
   position: relative;
 }
 
 header input[type="text"] {
-  padding: 10px;
-  width: calc(100% - 40px);
-  margin: 10px auto;
+  padding: 8px;
+  width: calc(100% - 20px); /* Адаптация ширины */
+  margin: 5px auto;
   display: block;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box; /* Учитывает padding в ширине */
 }
 
 main {
-  padding: 20px;
+  padding: 10px; /* Уменьшено для мобильных */
 }
 
 .asset-item {
   background-color: #fff;
   border: 1px solid #ddd;
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-wrap: wrap; /* Разрешает перенос на следующую строку */
   align-items: center;
   justify-content: space-between;
 }
 
 .asset-item .asset-text {
   flex: 1;
+  padding-right: 10px; /* Расстояние между текстом и картинкой */
 }
 
 .asset-item .asset-image {
-  max-width: 300px; /* Увеличенное изображение */
+  max-width: 100%; /* Занимает всю доступную ширину */
   height: auto;
-  margin-left: 20px;
+  margin-left: 0;
 }
+
 
 .asset-item h2 {
   margin-top: 0;
+  margin-bottom: 5px;
 }
 
 .view-details, .download-button {
   display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin-top: 5px;
+  padding: 5px 10px; /* Уменьшено для мобильных */
   background-color: #007BFF;
   color: #fff;
   text-decoration: none;
@@ -77,26 +83,35 @@ a:hover {
 
 #asset-image {
   display: block;
-  margin: 10px 0;
-  max-width: 50%; /* Уменьшенное изображение */
+  margin: 10px auto; /* Центрирование изображения */
+  max-width: 100%; /* Занимает всю доступную ширину */
   height: auto;
 }
 
 .asset-details-container {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column; /* Изменено для мобильных */
+  align-items: center; /* Центрирование */
   margin-bottom: 20px;
-  position: relative;
 }
 
 .asset-additional-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-left: 20px;
-  margin-top: 20px;
+  position: relative; /* Убрано абсолютное позиционирование */
+  margin-top: 10px;
+  text-align: center;
 }
 
 .asset-additional-info p {
   margin: 5px 0;
+}
+
+/* Медиа-запросы для адаптации под мобильные устройства */
+@media (max-width: 768px) {
+  .asset-item {
+    flex-direction: column; /* Текст и изображение друг под другом */
+    align-items: center;
+  }
+  .asset-item .asset-image {
+    margin-bottom: 10px;
+  }
 }
