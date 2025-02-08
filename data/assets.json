@@ -11,7 +11,7 @@
   {
     "id": 2,
     "name": "Localization 1.0",
-    "description": "Description of Localization 1.0",
+    "description": "Localization Asset 1.0 for Unity provides a simple and efficient way to localize your project into multiple languages, including support for Text Mesh Pro. Supported languages are: Russian, English, Traditional Chinese, European Portuguese, and Brazilian Portuguese. The asset allows easy management of text strings within Text Mesh Pro components, switching languages during gameplay, and provides a clean and intuitive interface for editing translations. With Localization 1.0, you can create multilingual games and applications accessible to a wider audience, leveraging the capabilities of Text Mesh Pro for high-quality text rendering.",
     "file": "https://drive.google.com/uc?export=download&id=1_Kpm6b-RsVjQm45NiHyMmHKKPoE1AnTl",
     "image": "images/Localization 1.0.png",
     "version": "1.0",
