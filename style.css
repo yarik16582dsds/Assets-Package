@@ -2,7 +2,6 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  /* background-color: #f4f4f4;  Убрано, чтобы не конфликтовало с цветом main */
   overflow-x: hidden;
 }
 
@@ -30,7 +29,7 @@ main {
 }
 
 .asset-item {
-  background-color: #fff;
+  background-color: #101A23;
   border: 1px solid #ddd;
   margin-bottom: 10px;
   padding: 10px;
@@ -40,6 +39,7 @@ main {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  color: white;
 }
 
 .asset-item .asset-text {
@@ -59,7 +59,7 @@ main {
 }
 
 .asset-item p {
-  font-weight: normal; /* вернули обычный шрифт для описания на главной */
+  font-weight: normal;
 }
 
 .view-details, .download-button {
