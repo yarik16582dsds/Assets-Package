@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "ScriptEditorWindow",
-    "description": "Description of ScriptEditorWindow",
+    "description": "ScriptEditorWindow is a powerful tool inside Unity that provides a convenient environment for writing and debugging scripts in C# directly in the Unity editor.",
     "file": "https://drive.google.com/uc?export=download&id=1vUJdsffNOMq_YACrJuWFz6UWbJI_JKIu",
     "image": "images/ScriptEditorWindow.png",
     "version": "1.0",
