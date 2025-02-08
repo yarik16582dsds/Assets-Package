@@ -114,8 +114,8 @@ a:hover {
   }
 
   .main-page-assets .asset-item .asset-image {
-    max-width: 300px;
-    height: 200px;
+    max-width: 250px;
+    height: 150;
     object-fit: cover;
   }
 
