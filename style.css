@@ -3,29 +3,29 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
-  overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+  overflow-x: hidden;
 }
 
 header {
   background-color: #333;
   color: #fff;
-  padding: 10px; /* Уменьшено для мобильных */
+  padding: 10px;
   text-align: center;
   position: relative;
 }
 
 header input[type="text"] {
   padding: 8px;
-  width: calc(100% - 20px); /* Адаптация ширины */
+  width: calc(100% - 20px);
   margin: 5px auto;
   display: block;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-sizing: border-box; /* Учитывает padding в ширине */
+  box-sizing: border-box;
 }
 
 main {
-  padding: 10px; /* Уменьшено для мобильных */
+  padding: 10px;
 }
 
 .asset-item {
@@ -36,22 +36,21 @@ main {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-wrap: wrap; /* Разрешает перенос на следующую строку */
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 }
 
 .asset-item .asset-text {
   flex: 1;
-  padding-right: 10px; /* Расстояние между текстом и картинкой */
+  padding-right: 10px;
 }
 
 .asset-item .asset-image {
-  max-width: 100%; /* Занимает всю доступную ширину */
+  max-width: 100%;
   height: auto;
   margin-left: 0;
 }
-
 
 .asset-item h2 {
   margin-top: 0;
@@ -61,7 +60,7 @@ main {
 .view-details, .download-button {
   display: inline-block;
   margin-top: 5px;
-  padding: 5px 10px; /* Уменьшено для мобильных */
+  padding: 5px 10px;
   background-color: #007BFF;
   color: #fff;
   text-decoration: none;
@@ -83,20 +82,20 @@ a:hover {
 
 #asset-image {
   display: block;
-  margin: 10px auto; /* Центрирование изображения */
-  max-width: 100%; /* Занимает всю доступную ширину */
+  margin: 10px auto;
+  max-width: 100%;
   height: auto;
 }
 
 .asset-details-container {
   display: flex;
-  flex-direction: column; /* Изменено для мобильных */
-  align-items: center; /* Центрирование */
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .asset-additional-info {
-  position: relative; /* Убрано абсолютное позиционирование */
+  position: relative;
   margin-top: 10px;
   text-align: center;
 }
@@ -108,10 +107,13 @@ a:hover {
 /* Медиа-запросы для адаптации под мобильные устройства */
 @media (max-width: 768px) {
   .asset-item {
-    flex-direction: column; /* Текст и изображение друг под другом */
+    flex-direction: column;
     align-items: center;
   }
   .asset-item .asset-image {
     margin-bottom: 10px;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
   }
 }
