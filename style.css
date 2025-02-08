@@ -8,58 +8,63 @@ body {
 header {
   background-color: #333;
   color: #fff;
-  padding: 20px;
+  padding: 10px; /* уменьшен padding */
   text-align: center;
-  position: relative;
 }
 
 header input[type="text"] {
-  padding: 10px;
-  width: calc(100% - 40px);
-  margin: 10px auto;
+  padding: 8px;
+  width: calc(100% - 20px);
+  margin: 5px auto;
   display: block;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box; /* Добавлено для корректного учёта padding */
 }
 
+
 main {
-  padding: 20px;
+  padding: 10px;
 }
 
 .asset-item {
+  display: flex;
+  flex-direction: column; /* Вертикальное расположение на мобильных */
+  align-items: center;
   background-color: #fff;
   border: 1px solid #ddd;
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.asset-item .asset-text {
-  flex: 1;
-}
-
-.asset-item .asset-image {
-  max-width: 300px; /* Увеличенное изображение */
+.asset-item img {
+  max-width: 100%;
   height: auto;
-  margin-left: 20px;
+  margin-bottom: 10px;
 }
 
-.asset-item h2 {
+.asset-text {
+  text-align: center; /* центрируем текст */
+}
+
+.asset-text h2 {
   margin-top: 0;
 }
 
+
 .view-details, .download-button {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
   background-color: #007BFF;
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
+  padding: 8px 16px;
+  margin: 5px 0;
+  width: 100%; /* Занимаем всю ширину на маленьких экранах */
+  box-sizing: border-box;
 }
 
 .view-details:hover, .download-button:hover {
@@ -75,28 +80,56 @@ a:hover {
   text-decoration: underline;
 }
 
-#asset-image {
-  display: block;
-  margin: 10px 0;
-  max-width: 50%; /* Уменьшенное изображение */
-  height: auto;
+
+/* Стили для больших экранов */
+@media (min-width: 768px) {
+  .asset-item {
+    flex-direction: row; /* Горизонтальное расположение */
+    align-items: center;
+    padding: 15px;
+  }
+  .asset-text {
+    text-align: left; /* текст слева */
+    margin-left: 20px;
+  }
+  .asset-item img {
+    max-width: 300px;
+    height: auto;
+  }
+  .view-details, .download-button {
+    width: auto; /* Автоматическая ширина */
+    margin: 0 5px;
+  }
 }
 
+/*  Стили для страницы asset-page.html */
 .asset-details-container {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 20px;
-  position: relative;
+  flex-direction: column; /* Вертикальное расположение на мобильных */
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .asset-details-container {
+    flex-direction: row;
+    align-items: flex-start; /* Выравнивание по верху */
+  }
+  .asset-additional-info {
+    margin-left: 20px; /* Отступ от изображения */
+  }
+}
+
+#asset-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .asset-additional-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-left: 20px;
-  margin-top: 20px;
+    text-align:center;
 }
 
-.asset-additional-info p {
-  margin: 5px 0;
+.asset-additional-info p{
+    margin: 5px 0;
 }
+
