@@ -25,5 +25,14 @@
     "image": "images/GraphicsSettings.png",
     "version": "1.0",
     "size": "3,32MB"
+  },
+  {
+    "id": 4,
+    "name": "UniFX",
+    "description": "Description of UniFX",
+    "file": "https://drive.google.com/uc?export=download&id=1elWVBCfOEepQyJvhPaNaLSYzWKwg4X4j",
+    "image": "images/UniFX.png",
+    "version": "1.0",
+    "size": "80,0КБ"
   }
 ]
