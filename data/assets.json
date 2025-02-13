@@ -34,5 +34,14 @@
     "image": "images/UniFX.png",
     "version": "1.0",
     "size": "80,0КБ"
+  },
+  {
+    "id": 5,
+    "name": "Sky",
+    "description": "Description of Sky",
+    "file": "https://drive.google.com/uc?export=download&id=10n4fqacct3_d_PtjKmals_1wu84kd59I",
+    "image": "images/Sky.png",
+    "version": "1.0",
+    "size": "26,4КБ"
   }
 ]
