@@ -43,5 +43,14 @@
     "image": "images/Sky.png",
     "version": "1.0",
     "size": "26,4КБ"
+  },
+  {
+    "id": 6,
+    "name": "Water",
+    "description": "Description of Water",
+    "file": "https://drive.google.com/uc?export=download&id=1-6s1lCMF8y-OVnso4UXkHIDV2jSqDr1w",
+    "image": "images/Water.png",
+    "version": "1.0",
+    "size": "33,9КБ"
   }
 ]
